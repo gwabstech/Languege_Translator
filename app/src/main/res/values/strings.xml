@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Languege Translator</string>
+    <string name="enter_text_to_translate">Enter Text To Translate</string>
+</resources>
