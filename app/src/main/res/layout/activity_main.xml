@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/white"
@@ -16,10 +15,13 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
+        android:autofillHints=""
         android:hint="@string/enter_text_to_translate"
         android:inputType="text"
         android:maxHeight="70dp"
-        android:minHeight="50dp" />
+        android:minHeight="50dp"
+        android:textColorHint="#757575"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
 
 
@@ -29,7 +31,8 @@
         android:layout_marginTop="20dp"
         android:orientation="horizontal"
         android:weightSum="2"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false">
 
        <LinearLayout
            android:layout_margin="5dp"
@@ -40,13 +43,14 @@
 
            <TextView
                android:layout_width="match_parent"
-               android:text="Translate From"
+               android:text="@string/translate_from"
                android:textAlignment="center"
                android:layout_height="wrap_content"/>
 
            <androidx.appcompat.widget.AppCompatSpinner
                android:layout_width="match_parent"
-               android:layout_height="wrap_content"/>
+               android:layout_height="48dp"
+               android:contentDescription="@string/enter_text_to_translate" />
 
        </LinearLayout>
 
@@ -60,13 +64,14 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:text="Translate From"
+                android:text="@string/translate_to"
                 android:textAlignment="center"
                 android:layout_height="wrap_content"/>
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="48dp"
+                android:contentDescription="@string/enter_text_to_translate" />
 
         </LinearLayout>
 
