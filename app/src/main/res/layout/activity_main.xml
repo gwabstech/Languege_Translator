@@ -80,6 +80,22 @@
 
     <TextView
         android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:hint="@string/translated_text"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:padding="10dp"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:padding="5dp"
+        android:text="@string/tanslate"
+        android:textAlignment="center"/>
 
 </LinearLayout>

@@ -3,4 +3,6 @@
     <string name="enter_text_to_translate">Enter Text To Translate</string>
     <string name="translate_from">Translate From</string>
     <string name="translate_to">Translate To</string>
+    <string name="tanslate">Tanslate</string>
+    <string name="translated_text">Translated text</string>
 </resources>
