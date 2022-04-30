@@ -5,8 +5,14 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,11 +29,14 @@ import com.google.mlkit.nl.translate.Translator;
 import com.google.mlkit.nl.translate.TranslatorOptions;
 import com.gwabs.languegetranslator.databinding.ActivityMainBinding;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
   private   ActivityMainBinding mainBinding ;
     private String textFrom, textTo;
     private ProgressDialog progress;
+    //private boolean isConnected = false;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = mainBinding.getRoot();
         setContentView(view);
+
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.Languages, android.R.layout.simple_spinner_item);
@@ -126,17 +136,30 @@ public class MainActivity extends AppCompatActivity {
 
         mainBinding.btnTranslate.setOnClickListener(view1 -> {
 
-            if (mainBinding.edtTextToTranslate.getText() !=null){
+            if (TextUtils.isEmpty(mainBinding.edtTextToTranslate.getText().toString())){
+                mainBinding.edtTextToTranslate.setError("Please Enter Text");
+            }else {
+
                 if (textFrom.equals("None") || textTo.equals("None")){
                     Toast.makeText(this, "Please select Source lang and Target lang", Toast.LENGTH_SHORT).show();
                 }else if (textFrom.equals(textTo)){
-
+                    Toast.makeText(this, "Please select Source lang and Target lang", Toast.LENGTH_SHORT).show();
                 }else{
-                   // progress.show();
+                    // progress.show();
                     sendTranslation(textFrom,textTo,mainBinding.edtTextToTranslate.getText().toString());
                 }
-            }else {
-                mainBinding.edtTextToTranslate.setError("Please Enter Text");
+
+            }
+        });
+
+        mainBinding.tvCopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Objects.requireNonNull(mainBinding.txResult).getText().toString() == null) {
+                    copyText(mainBinding.txResult.getText().toString());
+                }
+
+
             }
         });
     }
@@ -194,5 +217,36 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
+    }
+
+    private void copyText(String text){
+        ClipboardManager clipboard = (ClipboardManager)
+                getSystemService(Context.CLIPBOARD_SERVICE);
+        // Creates a new text clip to put on the clipboard
+        ClipData clip = ClipData.newPlainText("simple text", text);
+        clipboard.setPrimaryClip(clip);
+    }
+
+    private boolean isConnected(){
+
+            boolean connected = false;
+            try {
+                ConnectivityManager cm = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo nInfo = cm.getActiveNetworkInfo();
+                connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+                return connected;
+            } catch (Exception e) {
+                Log.e("Connectivity Exception", e.getMessage());
+            }
+            return connected;
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (!isConnected()){
+            Toast.makeText(MainActivity.this,"Please connect to Internet for maximum perfomance",Toast.LENGTH_SHORT).show();
+        }
     }
 }

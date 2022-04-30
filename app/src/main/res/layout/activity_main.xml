@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,157 +9,185 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="5dp"
-        android:layout_margin="5dp"
-        android:layout_height="wrap_content">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
 
-        <EditText
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/edtTextToTranslate"
-            android:layout_marginEnd="5dp"
-            android:autofillHints=""
-            android:hint="@string/enter_text_to_translate"
-            android:inputType="text"
-            android:maxHeight="70dp"
-            android:minHeight="50dp"
-            android:textColorHint="#757575"
-            tools:ignore="DuplicateSpeakableTextCheck" />
-    </androidx.cardview.widget.CardView>
+           <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="6dp"
+               android:layout_marginEnd="6dp"
+               android:layout_marginTop="15dp"
+               android:layout_marginBottom="15dp"
+               app:cardBackgroundColor="@color/white"
+               app:cardCornerRadius="4dp">
 
-
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
-        android:layout_margin="10dp"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_margin="10dp"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_height="wrap_content"
-            android:baselineAligned="false">
-
-            <LinearLayout
-                android:layout_margin="5dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:text="@string/translate_from"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:layout_height="wrap_content"/>
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:id="@+id/spinner_from"
-                    android:contentDescription="@string/enter_text_to_translate" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:src="@drawable/rot"
-                android:layout_height="wrap_content"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_margin="5dp"
-                android:layout_height="wrap_content">
+               <EditText
+                   android:id="@+id/edtTextToTranslate"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_margin="5dp"
+                   android:autofillHints="todo"
+                   android:ems="10"
+                   android:gravity="start|top"
+                   android:hint="@string/enter_text_to_translate"
+                   android:inputType="textMultiLine"
+                   android:minHeight="48dp"
+                   android:textColorHint="#757575"
+                   tools:ignore="DuplicateSpeakableTextCheck" />
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:text="@string/translate_to"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:layout_height="wrap_content"/>
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:id="@+id/spinner_to"
-                    android:contentDescription="@string/enter_text_to_translate" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+           </androidx.cardview.widget.CardView>
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
-        android:layout_margin="10dp"
-        android:layout_height="match_parent">
+           <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="6dp"
+               android:layout_marginEnd="6dp"
+               android:layout_marginTop="15dp"
+               android:layout_marginBottom="15dp"
+               app:cardBackgroundColor="@color/white"
+               app:cardCornerRadius="5dp"
+               app:cardElevation="5dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:weightSum="1"
-            android:layout_height="match_parent">
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_margin="10dp"
+                   android:baselineAligned="false"
+                   android:orientation="horizontal"
+                   android:weightSum="2">
 
-            <TextView
-                android:id="@+id/tx_result"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="20dp"
-                android:layout_weight="0.9"
-                android:hint="@string/translated_text"
-                android:padding="10dp"
-                android:textColor="@color/black" />
+                   <LinearLayout
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="5dp"
+                       android:layout_weight="1"
+                       android:orientation="vertical">
 
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:text="@string/translate_from"
+                           android:textAlignment="center"
+                           android:textColor="@color/black" />
 
-            <TextView
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:textColor="@color/black"
-                android:text="copy"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:drawableStart="@drawable/ic_baseline_content_copy_24"
-                android:layout_height="wrap_content"/>
+                       <androidx.appcompat.widget.AppCompatSpinner
+                           android:id="@+id/spinner_from"
+                           android:layout_width="match_parent"
+                           android:layout_height="48dp"
+                           android:contentDescription="@string/enter_text_to_translate" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:id="@+id/btn_Translate"
-                android:padding="5dp"
-                android:text="@string/tanslate"
-                android:textAlignment="center"/>
-        </LinearLayout>
+                   </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+                   <ImageView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:contentDescription="TODO"
+                       android:src="@drawable/rot"
+                       tools:ignore="ContentDescription,ImageContrastCheck" />
 
-
-
+                   <LinearLayout
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="5dp"
+                       android:layout_weight="1"
+                       android:orientation="vertical">
 
 
-</LinearLayout>
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:text="@string/translate_to"
+                           android:textAlignment="center"
+                           android:textColor="@color/black" />
+
+                       <androidx.appcompat.widget.AppCompatSpinner
+                           android:id="@+id/spinner_to"
+                           android:layout_width="match_parent"
+                           android:layout_height="48dp"
+                           android:contentDescription="@string/enter_text_to_translate" />
+
+                   </LinearLayout>
+
+               </LinearLayout>
+           </androidx.cardview.widget.CardView>
+
+
+           <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_marginStart="6dp"
+               android:layout_marginEnd="6dp"
+               android:layout_marginTop="15dp"
+               android:layout_marginBottom="10dp"
+               app:cardBackgroundColor="@color/white"
+               app:cardCornerRadius="5dp"
+               app:cardElevation="5dp">
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:orientation="vertical"
+                   android:weightSum="1">
+
+                   <TextView
+                       android:id="@+id/tx_result"
+                       android:layout_width="match_parent"
+                       android:layout_height="0dp"
+                       android:layout_marginStart="10dp"
+                       android:layout_marginTop="20dp"
+                       android:layout_marginEnd="10dp"
+                       android:layout_marginBottom="20dp"
+                       android:layout_weight="0.9"
+                       android:hint="@string/translated_text"
+                       android:padding="10dp"
+                       android:textColor="@color/black"
+                       android:textColorHint="#757575" />
+
+
+                   <TextView
+                       android:id="@+id/tvCopy"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center"
+                       android:drawableStart="@drawable/ic_baseline_content_copy_24"
+                       android:text="copy"
+                       android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                       android:textColor="@color/black" />
+
+
+               </LinearLayout>
+
+           </androidx.cardview.widget.CardView>
+
+           <Button
+               android:id="@+id/btn_Translate"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_margin="10dp"
+               android:background="@drawable/btn_bg"
+               android:padding="5dp"
+               android:text="@string/tanslate"
+               android:textAlignment="center"
+               android:textSize="18sp"
+               android:textStyle="bold" />
+       </LinearLayout>
+   </RelativeLayout>
+
+
+
+
+
+
+
+
+
+</ScrollView>
