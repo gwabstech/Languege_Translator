@@ -1,13 +1,22 @@
 package com.gwabs.languegetranslator;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.mlkit.common.model.DownloadConditions;
 import com.google.mlkit.nl.translate.TranslateLanguage;
 import com.google.mlkit.nl.translate.Translation;
 import com.google.mlkit.nl.translate.Translator;
@@ -16,8 +25,10 @@ import com.gwabs.languegetranslator.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    ActivityMainBinding mainBinding ;
+  private   ActivityMainBinding mainBinding ;
     private String textFrom, textTo;
+    private ProgressDialog progress;
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mainBinding.spinnerFrom.setAdapter(adapter);
         mainBinding.spinnerTo.setAdapter(adapter);
+          progress= new ProgressDialog(this);
+          progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+          progress.setTitle("Please wait...");
+          progress.setCancelable(false);
+
 
         mainBinding.spinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -109,26 +125,74 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mainBinding.btnTranslate.setOnClickListener(view1 -> {
-             //sendTranslation();
+
+            if (mainBinding.edtTextToTranslate.getText() !=null){
+                if (textFrom.equals("None") || textTo.equals("None")){
+                    Toast.makeText(this, "Please select Source lang and Target lang", Toast.LENGTH_SHORT).show();
+                }else if (textFrom.equals(textTo)){
+
+                }else{
+                   // progress.show();
+                    sendTranslation(textFrom,textTo,mainBinding.edtTextToTranslate.getText().toString());
+                }
+            }else {
+                mainBinding.edtTextToTranslate.setError("Please Enter Text");
+            }
         });
     }
 
-    private void sendTranslation(String textFrom,String textTo,String text){
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void sendTranslation(String textFrom, String textTo, String text){
+        progress.show();
 
-        if (text !=null){
-            if (textFrom.equals("None") || textTo.equals("None")){
-                Toast.makeText(this, "Please select Source lang and Target lang", Toast.LENGTH_SHORT).show();
-            }
-        }else {
-            mainBinding.edtTextToTranslate.setError("Please Enter Text");
-        }
 
         TranslatorOptions options =
                 new TranslatorOptions.Builder()
                         .setSourceLanguage(textFrom)
                         .setTargetLanguage(textTo)
                         .build();
-        final Translator englishGermanTranslator =
+        final Translator translator =
                 Translation.getClient(options);
+        DownloadConditions conditions = new DownloadConditions.Builder()
+                .build();
+        translator.downloadModelIfNeeded(conditions)
+        .addOnSuccessListener(
+                new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+                        translator.translate(text).addOnSuccessListener(new OnSuccessListener<String>() {
+                            @Override
+                            public void onSuccess(String s) {
+                                progress.dismiss();
+                                Log.i("Tag",s.toString());
+                                mainBinding.txResult.setText(s.toString());
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progress.dismiss();
+                                mainBinding.txResult.setText(e.toString());
+                            }
+                        });
+
+                    }
+                })
+                .addOnFailureListener(
+                        new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progress.dismiss();
+                                Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+      //  translator.close();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
     }
 }
