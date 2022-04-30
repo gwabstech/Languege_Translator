@@ -5,4 +5,15 @@
     <string name="translate_to">Translate To</string>
     <string name="tanslate">Tanslate</string>
     <string name="translated_text">Translated text</string>
+
+    <string-array name="Languages">
+        <item>Select</item>
+        <item>English</item>
+        <item>Arabic</item>
+        <item>French</item>
+        <item>Swahili</item>
+        <item>Turkish</item>
+        <item>Portuguese</item>
+        <item>German</item>
+    </string-array>
 </resources>

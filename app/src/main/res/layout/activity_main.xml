@@ -11,9 +11,10 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="84dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
+        android:id="@+id/edtTextToTranslate"
         android:layout_marginEnd="5dp"
         android:autofillHints=""
         android:hint="@string/enter_text_to_translate"
@@ -50,6 +51,7 @@
            <androidx.appcompat.widget.AppCompatSpinner
                android:layout_width="match_parent"
                android:layout_height="48dp"
+               android:id="@+id/spinner_from"
                android:contentDescription="@string/enter_text_to_translate" />
 
        </LinearLayout>
@@ -71,31 +73,43 @@
             <androidx.appcompat.widget.AppCompatSpinner
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:id="@+id/spinner_to"
                 android:contentDescription="@string/enter_text_to_translate" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:hint="@string/translated_text"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:padding="10dp"
-        android:layout_height="wrap_content" />
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:padding="5dp"
-        android:text="@string/tanslate"
-        android:textAlignment="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:id="@+id/tx_result"
+            android:layout_marginBottom="20dp"
+            android:hint="@string/translated_text"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:padding="10dp"
+            android:layout_weight="0.9"
+            android:layout_height="0dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:id="@+id/btn_Translate"
+            android:padding="5dp"
+            android:text="@string/tanslate"
+            android:textAlignment="center"/>
+    </LinearLayout>
+
+
 
 </LinearLayout>
