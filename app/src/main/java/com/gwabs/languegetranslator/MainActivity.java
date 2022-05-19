@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         mainBinding.spinnerTo.setAdapter(adapter);
           progress= new ProgressDialog(this);
           progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-          progress.setTitle("Please wait...");
+          progress.setTitle("Please wait....");
           progress.setCancelable(false);
 
 
