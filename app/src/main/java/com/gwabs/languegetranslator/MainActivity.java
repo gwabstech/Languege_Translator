@@ -102,8 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (i){
                     case 0:
                         textTo = "None";
-                        break;
-                    case 1:
+                        break; case 1:
                         textTo ="en";
                         break;
                     case 2:
