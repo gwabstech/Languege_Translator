@@ -27,7 +27,7 @@
         android:textColor="@color/white"
         android:layout_margin="10dp"
         android:textAlignment="center"
-        android:text="@string/hnd_own"
+        android:text="@string/group_members"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>
