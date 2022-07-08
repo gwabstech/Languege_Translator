@@ -5,8 +5,7 @@
     <string name="translate_to">Translate To</string>
     <string name="tanslate">Tanslate</string>
     <string name="translated_text">Translated text</string>
-    <string name="group_members">Computer Science Department \n Kaduna Polytechnic \n FInal Year Project By:\n \nTemidayo Felicialge KPT/CST/ 19/43354\n \n Umar Abdullahi KPT/CST/19/4/3229 \n \n Fatima Yahaya sale KPT/CST/ 19/43196</string>
-    <string name="hnd_own">Computer Science Department \n Kaduna Polytechnic \n FInal Year Project By:\n \n Etikwu Amos Chritoper \n\n KTP/CST/19/48781</string>
+    <string name="group_members">Computer Science Department \n Kaduna Polytechnic \n FInal Year Project By:\n \nTemidayo Felicia Ige kpt/cst/19/43354\n \n Umar abdullahi kpt/cst/19/43229 \n \n Fatima Yahaya sale kpt/cst/19/43196</string>
     <string-array name="Languages">
         <item>Select</item>
         <item>English</item>
