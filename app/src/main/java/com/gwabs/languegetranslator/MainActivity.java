@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -154,11 +155,14 @@ public class MainActivity extends AppCompatActivity {
         mainBinding.tvCopy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Objects.requireNonNull(mainBinding.txResult).getText().toString() == null) {
+
+
+                if (mainBinding.txResult.getText() != null){
                     copyText(mainBinding.txResult.getText().toString());
+                    mainBinding.txResult.setTextIsSelectable(true);
+                }else {
+                    mainBinding.txResult.setTextIsSelectable(true);
                 }
-
-
             }
         });
     }
@@ -219,12 +223,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void copyText(String text){
-        ClipboardManager clipboard = (ClipboardManager)
-                getSystemService(Context.CLIPBOARD_SERVICE);
-        // Creates a new text clip to put on the clipboard
-        ClipData clip = ClipData.newPlainText("simple text", text);
-        clipboard.setPrimaryClip(clip);
+        ClipboardManager cm = (ClipboardManager)  getSystemService(Context.CLIPBOARD_SERVICE);
+        cm.setText(text);
+        Toast.makeText(this, "Copied to clipboard", Toast.LENGTH_SHORT).show();
     }
+
 
     private boolean isConnected(){
 
@@ -245,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (!isConnected()){
-            Toast.makeText(MainActivity.this,"Please connect to Internet for maximum perfomance",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this,"Please connect to Internet for maximum performance",Toast.LENGTH_SHORT).show();
         }
     }
 }
